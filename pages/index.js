@@ -1,11 +1,17 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import products from '../products.json';
+import products from '../products.json'
+import prodigiStatus from '../src/hooks/prodigiStatus'
+import prodigiOrder from '../src/hooks/prdogiOrder'
+
 
 // import Nav from '../src/components/Nav';
 
 
 export default function Home() {
+  const [status] = prodigiStatus('');
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -27,7 +33,7 @@ export default function Home() {
             <strong>Cart:</strong> <span className="snipcart-total-price">$0.00</span>
           </a>
         </p>
-
+        <button class="snipcart-checkout">Click here to checkout</button>
         <div className={styles.grid}>
           {products.map(product => {
             return (
@@ -51,6 +57,7 @@ export default function Home() {
             );
           })}
         </div>
+
       </main>
 
       <footer className={styles.footer}>
@@ -65,7 +72,7 @@ export default function Home() {
       </footer>
 
       <script async src="https://cdn.snipcart.com/themes/v3.0.21/default/snipcart.js" />
-      <div id="snipcart" data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY} />
+      <div id="snipcart" data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}/>
     </div>
   )
 }
